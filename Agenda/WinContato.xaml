@@ -1,0 +1,161 @@
+﻿<Window x:Class="Agenda.WinContato"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Cadastro de cliente" 
+        Loaded="Window_Loaded"
+        WindowStyle="None"
+        Height="700" Width="900">
+    <Border Padding="10">
+        <StackPanel Margin="0,0,0,-10" >
+            <!--Buttons -->
+            <Grid Height="27">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button x:Name="BtnNovo" Content="Novo" Foreground="{StaticResource ForegroundLightBrush}" Background="{StaticResource GreenBrush}"
+                        Margin="0,0,10,0"  Grid.Column="0" />
+                <Button x:Name="BtnSalvar" Content="Salvar" Click="BtnSalvar_Click"  Foreground="{StaticResource ForegroundLightBrush}" Background="{StaticResource DarkBlueBrush}"
+                         Margin="0"  Grid.Column="1" />
+                <Button x:Name="BtnCancelar" Content="Cancelar" Click="BtnCancelar_Click"  Foreground="{StaticResource ForegroundLightBrush}" Background="{StaticResource OrangeBrush}"
+                        Margin="10,0,0,0" Grid.Column="2" />
+
+            </Grid>
+            <TextBlock Text="Propriedades" Margin="0,10  " FontSize="{StaticResource FontSizeXxLarge}"
+                       FontFamily="{StaticResource LatoRegular}"
+                       Foreground="{StaticResource ForegroundMainBrush}"/>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="88*"/>
+                    <ColumnDefinition Width="323*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Margin="0,0,10,0" Grid.Column="0">
+                    <TextBlock Text="Codigo" Margin="0,10  " FontSize="{StaticResource FontSizeXLarge}"
+                       FontFamily="{StaticResource LatoRegular}"
+                       Foreground="{StaticResource ForegroundMainBrush}"/>
+                    <TextBox  Text="{Binding Codigo}" Tag="Nome" Padding="5"/>
+                </StackPanel>
+                <StackPanel Margin="10,0,0,0" Grid.Column="1">
+                    <TextBlock Text="Nome" Margin="0,10  " FontSize="{StaticResource FontSizeXLarge}"
+                       FontFamily="{StaticResource LatoRegular}"
+                       Foreground="{StaticResource ForegroundMainBrush}"/>
+                    <TextBox  Text="{Binding Nome}" Tag="Nome"  Padding="5"/>
+                </StackPanel>
+            </Grid>
+
+            <TextBlock Text="Endereço" Foreground="{StaticResource ForegroundDarkBrush}"
+                                       FontFamily="{StaticResource Verdana}"
+                                       FontWeight="Bold" Margin="0,10" />
+
+            <Grid Margin="0,5">
+                <StackPanel Margin="0">
+                    <StackPanel Margin="0"/>
+                    <!--Tipo Pessoa -->
+                    <Grid Margin="0,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0"/>
+                        <StackPanel Margin="5,0" Grid.Column="1"/>
+                        <StackPanel Margin="5,0" Grid.Column="2"/>
+                    </Grid>
+
+                    <!-- Descricao -->
+
+                    <!-- Part Number -->
+                    <!-- Endereco -->
+                    <Grid Margin="0 ,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200*" />
+                            <ColumnDefinition Width="200*" />
+                            <ColumnDefinition Width="200*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Column 1 -->
+                        <StackPanel Grid.Column="0" Margin="0 0 10 0">
+                            <TextBlock  Text="Cep" />
+                            <TextBox x:Name="TxtCep" Text="{Binding Endereco.Cep}" Margin="0,5" />
+                            <TextBlock Text="Bairro" />
+                            <TextBox  x:Name="TxtBairro" Text="{Binding Endereco.Bairro}"  Margin="0,5"/>
+                            <TextBlock Text="Complemento"/>
+                            <TextBox x:Name="TxtComplemento" Text="{Binding Endereco.Complemento}" Margin="0,5" />
+                        </StackPanel>
+
+                        <!-- Column 2 -->
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="Logradouro" Margin="0,0,10,0" />
+                            <TextBox x:Name="TxtLogradouro" Text="{Binding Endereco.Logradouro}" Margin="0,5,10,5" />
+                            <TextBlock Text="Cidade"/>
+                            <TextBox x:Name="TxtCidade" Text="{Binding Endereco.Cidade}" Margin="0,5"/>
+                            <TextBlock Text="Codigo IBGE" Margin="0,0,10,0" />
+                            <TextBox x:Name="TxtCodigoIbge" Text="{Binding Endereco.CodigoIbge}" Margin="0,5,10,5" />
+
+                        </StackPanel>
+
+                        <!-- Column 3 -->
+                        <StackPanel Margin="10,0" Grid.Column="2">
+                            <TextBlock Text="Numero"/>
+                            <TextBox   x:Name="TxtNumero" Text="{Binding Endereco.Numero}" Margin="0,5"/>
+                            <TextBlock Text="Estado"/>
+                            <TextBox x:Name="TxtEstado" Text="{Binding Endereco.Estado}" Margin="0,5"/>
+                        </StackPanel>
+
+                    </Grid>
+                    <TextBlock Text="Contatos" Foreground="{StaticResource ForegroundDarkBrush}"
+                                       FontFamily="{StaticResource Verdana}"
+                                       FontWeight="Bold" Margin="0,10" />
+
+                    <!-- Endereco -->
+                    <Grid Margin="0 ,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200*" />
+                            <ColumnDefinition Width="200*" />
+                            <ColumnDefinition Width="200*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Column 1 -->
+                        <StackPanel Grid.Column="0" Margin="0 0 10 0">
+                            <TextBlock Text="Email" />
+                            <TextBox x:Name="TxtEmail" Text="{Binding Email}" Margin="0,5" />
+                        </StackPanel>
+
+                        <!-- Column 2 -->
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="Telefone Fixo" Margin="0,0,10,0" />
+                            <TextBox x:Name="TxtTelefoneFixo" Text="{Binding TelefoneFixo}" Margin="0,5,10,5" />
+
+                        </StackPanel>
+
+                        <!-- Column 3 -->
+                        <StackPanel Margin="10,0" Grid.Column="2">
+                            <TextBlock Text="Telefone Celular"/>
+                            <TextBox   x:Name="TxtTelefoneCelular" Text="{Binding TelefoneCelular}" Margin="0,5"/>
+                        </StackPanel>
+
+                    </Grid>
+
+
+                    <TextBlock Text="Informacoes Adicional" Foreground="{StaticResource ForegroundDarkBrush}"
+                                       FontFamily="{StaticResource Verdana}"
+                                       FontWeight="Bold" Margin="0,10" />
+                    <!-- Notas -->
+                    <TextBlock Text="Notas" />
+                    <TextBox x:Name="TxtNotas" Text="{Binding Descricao}" Padding="10" Height="49" />
+
+
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </Border>
+
+
+
+</Window>

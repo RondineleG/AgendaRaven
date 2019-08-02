@@ -1,0 +1,170 @@
+﻿<Window x:Class="Agenda.WinPrincipal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" 
+         xmlns:local="clr-namespace:Agenda"        
+        WindowStyle="None"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        x:Name="AppWindow"
+        Icon="Resources/Icons/Red/add.png"
+        MinWidth="{Binding WindowMinimumWidth}"
+        MinHeight="{Binding WindowMinimumHeight}"
+        Title="Welcom!" Height="600" Width="1162.65">
+
+    <Window.Resources>
+        <Style TargetType="{x:Type local:WinPrincipal}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Window}">
+                        <!-- Outer border with the dropshadow margin -->
+                        <Border Padding="{Binding OuterMarginSizeThickness, FallbackValue=10}">
+
+                            <!-- Main window outline -->
+                            <Grid>
+
+                                <!-- Opacity mask for corners on grid -->
+                                <Border x:Name="Container"
+                                        Background="{StaticResource BackgroundLightBrush}"
+                                        CornerRadius="{Binding WindowCornerRadius, FallbackValue=10}" />
+
+                                <!-- Window border and dropshadown -->
+                                <Border CornerRadius="{Binding WindowCornerRadius, FallbackValue=10}"
+                                    Background="{Binding ForegroundLightBrush, FallbackValue=White}">
+                                    <Border.Effect>
+                                        <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
+                                    </Border.Effect>
+                                </Border>
+
+                                <!-- The main window content -->
+                                <Grid>
+
+                                    <!-- Corner clipping -->
+                                    <Grid.OpacityMask>
+                                        <VisualBrush Visual="{Binding ElementName=Container}" />
+                                    </Grid.OpacityMask>
+
+                                    <Grid.RowDefinitions>
+
+                                        <!-- Title Bar -->
+                                        <RowDefinition Height="{Binding TitleHeightGridLength, FallbackValue=42}" />
+                                        <!-- Drop shadow -->
+                                        <RowDefinition Height="Auto" />
+                                        <!-- Window Content -->
+                                        <RowDefinition Height="*" />
+
+                                    </Grid.RowDefinitions>
+
+                                    <!-- Title Bar -->
+                                    <Grid Grid.Column="0" Panel.ZIndex="1">
+
+                                        <Grid.ColumnDefinitions>
+                                            <!-- Icon -->
+                                            <ColumnDefinition Width="Auto" />
+                                            <!-- Title -->
+                                            <ColumnDefinition Width="*" />
+                                            <!-- Windows Button -->
+                                            <ColumnDefinition Width="Auto" />
+
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- Icon -->
+                                        <Button Style="{StaticResource SystemIconButton}" Command="{Binding MenuCommand}">
+                                            <Image Source="/Resources/Icons/atualizar.png" />
+                                        </Button>
+
+                                        <!-- Title -->
+                                        <Viewbox Grid.Column="1" Margin="0">
+                                            <TextBlock Style="{StaticResource HeaderText}" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Title, FallbackValue='Welcome, friend!'}" />
+                                        </Viewbox>
+
+                                        <!-- Window Buttons -->
+                                        <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                            <Button Command="{Binding MinimizeCommand}" Style="{StaticResource WindowControlButton}" Content="_" />
+                                            <Button Command="{Binding MaximizeCommand}" Style="{StaticResource WindowControlButton}" Content="[ ]" />
+                                            <Button Command="{Binding CloseCommand}" Style="{StaticResource WindowCloseButton}" Content="X" />
+                                        </StackPanel>
+
+                                    </Grid>
+
+                                    <!-- Drop shadow -->
+                                    <Border Grid.Row="1" Height="6" BorderThickness="0 0.2 0 0">
+                                        <!-- Underline -->
+                                        <Border.BorderBrush>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1, 0">
+                                                <GradientStop Color="{StaticResource ForegroundLight}" Offset="0.0" />
+                                                <GradientStop Color="{StaticResource ForegroundMain}" Offset="0.5" />
+                                                <GradientStop Color="{StaticResource ForegroundLight}" Offset="1.0" />
+                                            </LinearGradientBrush>
+                                        </Border.BorderBrush>
+
+                                        <!-- Drop shadow -->
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="0, 1">
+                                                <GradientStop Color="{StaticResource BackgroundVeryLight}" Offset="0.0" />
+                                                <GradientStop Color="{StaticResource ForegroundLight}" Offset="1.0" />
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+
+                                    </Border>
+
+                                    <!-- Page Content -->
+                                    <Border Grid.Row="2" Padding="{Binding InnerContentPadding}">
+                                        <ContentPresenter Content="{TemplateBinding Content}" />
+                                    </Border>
+
+                                </Grid>
+
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome
+            ResizeBorderThickness="{Binding ResizeBorderThickness}"
+            CaptionHeight="{Binding TitleHeight}"
+            CornerRadius="0"
+            GlassFrameThickness="0"
+            />
+    </WindowChrome.WindowChrome>
+
+    <Grid Background="{StaticResource ForegroundLightBrush}">
+
+        <Grid>
+            <Button x:Name="btnNovo" Content="Novo" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="57" Height="30" Click="btnNovo_Click"/>
+            <Button x:Name="btnEditar" Content="Editar" HorizontalAlignment="Left" Margin="72,10,0,0" VerticalAlignment="Top" Width="57" Height="30" Click="btnEditar_Click"/>
+            <Button x:Name="btnExcluir" Content="Excluir" HorizontalAlignment="Left" Margin="134,10,0,0" VerticalAlignment="Top" Width="57" Height="30" Click="btnExcluir_Click"/>
+            <ListView x:Name="lstClientes" Margin="10,45,10,37" ItemsSource="{Binding}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="100" Header="Codigo" DisplayMemberBinding="{Binding Codigo}"/>                        
+                        <GridViewColumn Width="350" Header="Nome" DisplayMemberBinding="{Binding Nome}"/>
+                        <GridViewColumn Width="200" Header="Cidade" DisplayMemberBinding="{Binding Endereco.Cidade}"/>
+                        <GridViewColumn Width="100" Header="Estado" DisplayMemberBinding="{Binding Endereco.Estado}"/>
+                        <GridViewColumn Width="200" Header="Telefone Celular" DisplayMemberBinding="{Binding TelefoneCelular}"/>
+                        <GridViewColumn Width="250" Header="E-mail" DisplayMemberBinding="{Binding Email}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Button x:Name="btnAtualizar" Content="Atualizar" HorizontalAlignment="Left" Margin="196,10,0,0" VerticalAlignment="Top" Width="57" Height="30" Click="btnAtualizar_Click"/>
+            <TextBox x:Name="txtConsulta" HorizontalAlignment="Left" Height="23" Margin="336,14,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="167" KeyUp="txtConsulta_KeyUp"/>
+            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="280,18,0,0" TextWrapping="Wrap" Text="Termo:" VerticalAlignment="Top"/>
+            <TextBox x:Name="txtIdade" HorizontalAlignment="Left" Height="23" Margin="570,14,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="172" KeyUp="txtIdade_KeyUp"/>
+            <TextBlock x:Name="txtIdadeTextBlok" HorizontalAlignment="Left" Margin="519,18,0,0" TextWrapping="Wrap" Text="Idade:" VerticalAlignment="Top"/>
+            <Button x:Name="btnAnterior" Content="Página anterior" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="160" Click="btnAnterior_Click"/>
+            <Button x:Name="btnProximo" Content="Próxima página" Margin="0,0,8,10" VerticalAlignment="Bottom" Click="btnProximo_Click" HorizontalAlignment="Right" Width="160"/>
+            <TextBlock x:Name="txtPaginaAtual" HorizontalAlignment="Center" Margin="134,0,138,13" TextWrapping="Wrap" Text="Página: 1" VerticalAlignment="Bottom"/>
+
+        </Grid>
+    </Grid>
+
+</Window> 
+
+    
+ 
